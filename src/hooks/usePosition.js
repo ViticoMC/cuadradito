@@ -17,7 +17,7 @@ export function usePosition() {
     }, 100);
       return () => clearInterval(interval);
   
-    }, [position])
+    }, [position , moverCubo])
   
     
     return { position }

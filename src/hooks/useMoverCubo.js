@@ -2,15 +2,20 @@
 import { useContext } from 'react'
 import { PositionContext } from '../context/positionContext'
 import { useDirection } from './useDirection'
+import { useRespawnBolita } from './useRespawnBolita'
 import { maximos } from '../services/maximos'
 
 
 export function useMoverCubo() {
 
+
   const { position, setPosition } = useContext(PositionContext)
   const direction = useDirection()
   const { MaxX, MaxY } = maximos()
 
+  useRespawnBolita()
+ 
+   
 
 
   const   moverCubo = () => {
