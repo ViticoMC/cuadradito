@@ -1,11 +1,13 @@
-import { useContext } from "react";
-import { PositionBolitaContext } from "../context/positionBolitaContext";
+import { useBolitaStore } from '../store/bolita'
+
 
 
 export function Bolita() {
 
-    // Establecer la posicion en el contexto
-    const {positionBolita} = useContext(PositionBolitaContext)
+    const {positionBolita} = useBolitaStore()
+    
+
+
 
     return (
         // Contenedor para centrar la bolita

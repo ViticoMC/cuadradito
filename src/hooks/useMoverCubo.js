@@ -1,43 +1,41 @@
-
-import { useContext } from 'react'
-import { PositionContext } from '../context/positionContext'
+import { useGameStore } from '../store/game'
 import { useDirection } from './useDirection'
-import { useRespawnBolita } from './useRespawnBolita'
-import { maximos } from '../services/maximos'
 
 
 export function useMoverCubo() {
 
 
-  const { position, setPosition } = useContext(PositionContext)
-  const direction = useDirection()
-  const { MaxX, MaxY } = maximos()
+  const { position, setPosition , stop } = useGameStore()
+  let direction = useDirection()
 
-  useRespawnBolita()
- 
-   
+    
+
+  const moverCubo = () => {
+    
+
+    if (stop) {
+      setPosition({ x: 0, y: 0 })
+      return
+    }
 
 
-  const   moverCubo = () => {
+
     switch (direction) {
       case 'ArrowUp':
-        setPosition({ x: position.x, y: position.y - 1 < 0 ? position.y : position.y - 1 })
-        console.log(position)
-
+        setPosition({ x: position.x, y: position.y - 1 })
         break;
       case 'ArrowDown':
-        setPosition({ x: position.x, y: position.y + 1 > MaxY ? position.y : position.y + 1 })
-        console.log(position)
-
+        setPosition({ x: position.x, y: position.y + 1 })
         break;
       case 'ArrowLeft':
-        setPosition({ x: position.x - 1 < 0 ? position.x : position.x - 1, y: position.y })
-        console.log(position)
+        setPosition({ x: position.x - 1, y: position.y })
+
         break;
       case 'ArrowRight':
-        setPosition({ x: position.x + 1 > MaxX ? position.x : position.x + 1, y: position.y })
-        console.log(position)
+        setPosition({ x: position.x + 1, y: position.y })
+
         break;
+
     }
   }
 
