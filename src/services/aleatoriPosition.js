@@ -1,12 +1,13 @@
-
-import { maximos } from './maximos'
-
-const { MaxX, MaxY } = maximos()
+import { dimensiones } from '../const/dimensiones'
 
 
 export function numeroAleatorioEntero() {
-    let positionX=Math.floor(Math.random() * MaxX);
-    let positionY=Math.floor(Math.random() * MaxY);
+    let positionX=Math.floor(Math.random() * 20)*20;
+    let positionY=Math.floor(Math.random() * 20)*20;
     return {positionX, positionY}
 }
 
+
+export function numeroAleatorioDimension() {
+    return dimensiones[Math.floor(Math.random() * dimensiones.length)]
+}

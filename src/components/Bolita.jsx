@@ -11,10 +11,10 @@ export function Bolita() {
 
     return (
         // Contenedor para centrar la bolita
-        <div className="w-[25px] h-[25px] flex flex-col items-center justify-center absolute  "
+        <div className="w-[20px] h-[20px] flex flex-col items-center justify-center absolute  "
         style={{
-            top: `${positionBolita.y}%`,
-            left: `${positionBolita.x}%`,
+            top: `${positionBolita.y}px`,
+            left: `${positionBolita.x}px`,
         }}
         >
             {/* Bolita para capturar y aumentar puntuacion */}

@@ -4,12 +4,8 @@ import { useGameStore } from '../store/game'
 
 export function useDirection() {
       const [direction, setDirection] = useState('');
-      const {setStop , stop} = useGameStore()
+      const {setStop} = useGameStore()
 
-
-
-
-      
         useEffect(() => {
           const handleKeyPress = (event) => {
 
@@ -37,7 +33,7 @@ export function useDirection() {
            return () => {
             window.removeEventListener('keydown', handleKeyPress)
           }
-        }, [direction])
+        }, [direction , setStop])
 
         return direction
 }

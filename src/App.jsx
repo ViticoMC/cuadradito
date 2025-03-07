@@ -7,10 +7,10 @@ export function App() {
 
 
   return (
-    <>
+    <main className='flex flex-col h-1000px justify-start  items-center gap-4  '>
      <MainCuadro/>
      <Puntuacion/>
-    </>
+    </main>
   )
 }
 

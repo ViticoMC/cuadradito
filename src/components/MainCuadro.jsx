@@ -1,17 +1,64 @@
-import '../index.css'
-import { Cuadradito } from './Cuadradito'
-import { Bolita } from './Bolita'
-import { ModalLoser}  from './ModalLoser'
+import { Cuadradito } from './Cuadradito';
+import { Bolita } from './Bolita';
+import { ModalLoser } from './ModalLoser';
+import { useGameStore } from '../store/game';
+import { useObstaculos } from '../store/obstaculos';
+import { Obstaculo } from './Obstaculo';
+import { useEffect } from 'react';
+import { numeroAleatorioEntero } from '../services/aleatoriPosition';
+
+import '../index.css';
+import { useBolitaStore } from '../store/bolita';
+import { fondos } from '../const/fondos';
+
 
 export function MainCuadro() {
 
+  
+  const fondNumber = Math.floor(Math.random() * fondos.length);
 
+  const imgUrl = fondos[fondNumber]
+  const {puntuacion} = useGameStore()
+  const {obstaculos , setObstaculos , setObstaculosPosition } = useObstaculos()
+  const {positionBolita , prevPositionRadio} = useBolitaStore()
 
+ 
+
+  useEffect(() => {
+    setObstaculosPosition({x:0 , y :0} , true)
+
+  const obstacles =[]
+   for(let i = 0; i < puntuacion; i++){
+
+       let positionX , positionY = 0
+
+    do{
+        ( {positionX , positionY} = numeroAleatorioEntero())
+    }while( (positionX >= prevPositionRadio.x-80  && positionX<=prevPositionRadio.x+80) && (positionY >= prevPositionRadio.y-80  && positionY<=prevPositionRadio.y+80));
+
+      setObstaculosPosition({positionX , positionY} , false)
+      obstacles.push(<Obstaculo key={crypto.randomUUID()} positionX={positionX} positionY={positionY} />)
+   }
+   setObstaculos(obstacles)
+  }, [positionBolita.x, positionBolita.y, puntuacion, setObstaculos, prevPositionRadio, setObstaculosPosition])
+
+ 
   return (
-    <main className='w-[360px] h-[600px] md:w-[720px] lg:w-[990px]  bg-gray-950 m-auto border-4 border-black relative rounded-sm'>
-          <Bolita />
-          <Cuadradito />
-          <ModalLoser/>
-    </main>
-  )
+    <section className='w-[410px] h-[410px]  border-4 border-black relative rounded-sm flex flex-row p-[1px]'
+    
+    style={{
+      backgroundImage : `url(${imgUrl})`,
+      backgroundRepeat : 'no-repeat',
+      backgroundSize : 'cover',
+      backgroundPosition : 'bottom'
+    }}>
+      {
+        obstaculos.map((obstaculo) => obstaculo)
+      }
+      <Bolita />
+      <Cuadradito />
+      <ModalLoser />
+     
+    </section>
+  );
 }
