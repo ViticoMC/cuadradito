@@ -1,11 +1,14 @@
 import { useGameStore } from '../store/game'
 import { useDirection } from './useDirection'
+import { useAudios } from '../store/audios'
+import { backgroundMusic } from '../sound/sound';
 
 
 export function useMoverCubo() {
 
 
   const { position, setPosition , stop , gameOver } = useGameStore()
+  const {isBackgroundMusic , setIsBackgroundMusic} = useAudios()
   let direction = useDirection()
 
   const moverCubo = () => {
@@ -14,6 +17,13 @@ export function useMoverCubo() {
       setPosition({ x: 0, y: 0 })
       return
     }
+
+    if(!isBackgroundMusic ){
+      console.log("reproduciendo musica") 
+      backgroundMusic.play()
+    }
+
+    setIsBackgroundMusic(true)
 
     switch (direction) {
       case 'ArrowUp':

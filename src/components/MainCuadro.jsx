@@ -6,19 +6,12 @@ import { useObstaculos } from '../store/obstaculos';
 import { Obstaculo } from './Obstaculo';
 import { useEffect } from 'react';
 import { numeroAleatorioEntero } from '../services/aleatoriPosition';
-
 import '../index.css';
 import { useBolitaStore } from '../store/bolita';
-import { fondos } from '../const/fondos';
-
 
 export function MainCuadro() {
 
-  
-  const fondNumber = Math.floor(Math.random() * fondos.length);
-
-  const imgUrl = fondos[fondNumber]
-  const {puntuacion} = useGameStore()
+  const {puntuacion , fondoURL} = useGameStore()
   const {obstaculos , setObstaculos , setObstaculosPosition } = useObstaculos()
   const {positionBolita , prevPositionRadio} = useBolitaStore()
 
@@ -47,7 +40,7 @@ export function MainCuadro() {
     <section className='w-[410px] h-[410px]  border-4 border-black relative rounded-sm flex flex-row p-[1px]'
     
     style={{
-      backgroundImage : `url(${imgUrl})`,
+      backgroundImage : `url(${fondoURL})`,
       backgroundRepeat : 'no-repeat',
       backgroundSize : 'cover',
       backgroundPosition : 'bottom'

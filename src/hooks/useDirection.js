@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { asignarColor } from '../services/colorAleatorio'
 import { useGameStore } from '../store/game'
+
 
 export function useDirection() {
       const [direction, setDirection] = useState('');
@@ -9,7 +9,7 @@ export function useDirection() {
         useEffect(() => {
           const handleKeyPress = (event) => {
 
-
+           
             setStop(false)
 
             if (event.key === 'ArrowUp' || event.key === 'w') {
@@ -28,12 +28,13 @@ export function useDirection() {
       
           window.addEventListener('keydown', handleKeyPress)
       
-          asignarColor()
-      
+          // asignarColor()
+
+          
            return () => {
             window.removeEventListener('keydown', handleKeyPress)
           }
-        }, [direction , setStop])
+        }, [direction, setStop])
 
         return direction
 }
